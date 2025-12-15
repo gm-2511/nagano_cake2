@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :admin do
+    get 'customers/index'
+  end
+  namespace :admin do
     get 'genres/edit'
   end
   # 顧客
@@ -25,12 +28,8 @@ Rails.application.routes.draw do
     resources :items
     resources :products, only: [:index, :show, :new, :create, :edit, :update, :destroy]
     resources :genres, only: [:index, :create, :edit, :update]
+    resources :customers, only: [:index]
   end
-
-  # ===== 商品 =====
-  #namespace :admin do
-   # resources :items
-  #end
 
 end
 
