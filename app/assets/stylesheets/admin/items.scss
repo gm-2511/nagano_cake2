@@ -1,0 +1,18 @@
+// Place all the styles related to the admin/items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+/* app/assets/stylesheets/admin/items.scss など */
+/* app/assets/stylesheets/admin/items.scss などに追加 */
+/* app/assets/stylesheets/admin/items.scss などに追加 */
+/* Bootstrap環境の場合 */
+/* ページネーションの間隔を広げる */
+/* 文字間隔だけを調整 */
+.d-flex.justify-content-center.mt-4 .pagination {
+  letter-spacing: 10px; /* 文字間を10px広げる */
+}
+
+/* または各span要素の間隔 */
+.d-flex.justify-content-center.mt-4 .pagination span {
+  margin: 0 15px;
+  padding: 5px 10px;
+}
