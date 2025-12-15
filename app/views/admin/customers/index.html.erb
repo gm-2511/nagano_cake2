@@ -17,8 +17,12 @@
         <tr>
           <td><%= customer.id %></td>
 
+          <!-- 氏名クリックで詳細へ -->
           <td>
-            <%= customer.last_name %> <%= customer.first_name %>
+            <%= link_to admin_customer_path(customer),
+                        class: "text-decoration-none fw-bold" do %>
+              <%= customer.last_name %> <%= customer.first_name %>
+            <% end %>
           </td>
 
           <td><%= customer.email %></td>
