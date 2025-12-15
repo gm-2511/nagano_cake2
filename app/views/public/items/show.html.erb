@@ -1,2 +1,87 @@
-<h1>Public::Items#show</h1>
-<p>Find me in app/views/public/items/show.html.erb</p>
+<div class="container my-5">
+  <div class="row">
+    
+# --- 1. 左側のジャンル検索エリア (col-md-3) ---
+    <div class="col-md-3">
+      <h4>ジャンル検索</h4>
+      <%# ナビゲーション担当の方の実装待ちのため、箱だけを用意 %>
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action active">
+          [ジャンルA]
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+          [ジャンルB]
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+          [ジャンルC]
+        </a>
+      </div>
+    </div>
+    
+# --- 2. 右側のメインコンテンツエリア (col-md-9) ---
+    <div class="col-md-9">
+      
+      <% if @item.present? %>
+        <h2 class="mb-4"><%= @item.name %></h2>
+
+        <div class="row">
+# --- 2-A. 商品画像エリア (col-md-5, 親のcol-md-9内) ---
+          <div class="col-md-5">
+            <% if @item.image.attached? %>
+              <%= image_tag @item.image, alt: @item.name, class: "img-fluid" %>
+            <% else %>
+              <img src="https://via.placeholder.com/300" alt="<%= @item.name %>" class="img-fluid">
+            <% end %>
+          </div>
+          
+# --- 2-B. 商品情報/フォームエリア (col-md-7, 親のcol-md-9内) ---
+          <div class="col-md-7">
+            <table class="table table-borderless">
+              <tbody>
+                <tr>
+                  <th scope="row" class="w-25">商品説明</th>
+                  <td><%= @item.introduction %></td>
+                </tr>
+                <tr>
+                  <th scope="row">価格</th>
+                  <td>
+                    <span class="h4 text-danger">
+                      ¥<%= (@item.price * 1.1).to_i.to_s(:delimited) %> 
+                    </span>
+                    <span class="small">(税込)</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">ジャンル</th>
+                  <td>
+                    [ジャンル名]
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+# 2-C. カート投入フォームエリア（ワイヤーフレーム準拠）
+            <div class="mt-4">
+              <%= form_with url: "#", local: true, class: "row g-3 align-items-center" do %>
+                <div class="col-auto">
+                  <label for="quantity" class="col-form-label">個数選択</label>
+                </div>
+                <div class="col-auto">
+                  <input type="number" name="amount" id="quantity" class="form-control" style="width: 100px;" value="1" min="1">
+                </div>
+                <div class="col-auto">
+                  <%= button_tag type: 'submit', class: 'btn btn-success btn-lg' do %>
+                    カートに入れる
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <p class="alert alert-warning">指定された商品が見つかりませんでした。</p>
+      <% end %>
+      
+    </div>
+  </div>
+</div>

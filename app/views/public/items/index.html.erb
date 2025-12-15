@@ -1,2 +1,54 @@
-<h1>Public::Items#index</h1>
-<p>Find me in app/views/public/items/index.html.erb</p>
+<div class="container my-5">
+  <div class="row">
+    
+# --- 1. 左側のジャンル検索エリア (col-md-3) ---
+    <div class="col-md-3">
+      <h4>ジャンル検索</h4>
+      <%# ナビゲーション担当の方の実装待ちのため、箱だけを用意 %>
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action active">
+          [ジャンルA]
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+          [ジャンルB]
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+          [ジャンルC]
+        </a>
+      </div>
+    </div>
+    
+# --- 2. 右側のメインコンテンツエリア (col-md-9) ---
+    <div class="col-md-9">
+      <h2 class="mb-4">商品一覧 (<%= @items.total_count %>件)</h2>
+
+      <div class="row">
+        <% @items.each do |item| %>
+          <div class="col-md-3 mb-4">
+            <div class="card h-100">
+              <div class="text-center p-3">
+                <img src="https://via.placeholder.com/150" alt="<%= item.name %>" class="img-fluid" style="height: 150px; object-fit: cover;">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-center">
+                  <%= link_to public_item_path(item) do %>
+                    <%= item.name %>
+                  <% end %>
+                </h5>
+                <p class="card-text text-center text-danger">
+                  ¥<%= item.price.to_s(:delimited) %>
+                </p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+# --- 2. ページネーションの表示 ---
+      <div class="d-flex justify-content-center mt-4">
+        <%= paginate @items %>
+      </div>
+      
+    </div>
+  </div>
+</div>
