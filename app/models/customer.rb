@@ -10,6 +10,8 @@ class Customer < ApplicationRecord
   # デフォルト値
   after_initialize :set_default_status, if: :new_record?
 
+  has_many :addresses, dependent: :destroy
+
   private
 
   def set_default_status

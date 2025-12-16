@@ -29,6 +29,17 @@ Rails.application.routes.draw do
   # ===== 顧客側ルート =====
   scope module: :public do
     root to: 'homes#top'
+    get 'about' => 'homes#about', as: 'about'
     resources :items, only: [:index, :show]
+
+    # 会員情報の編集・更新・退会確認・退会処理用のルーティングを追加
+    get 'customers/my_page' => 'customers#show', as: 'my_page'
+    get 'customers/information/edit' => 'customers#edit', as: 'edit_information'
+    patch 'customers/information' => 'customers#update', as: 'update_information'
+    get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
+    patch 'customers/withdraw' => 'customers#withdraw', as: 'withdraw'
+    resources :customers, only: [:update]
+    
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
 end
