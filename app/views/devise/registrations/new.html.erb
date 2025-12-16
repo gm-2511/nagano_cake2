@@ -1,6 +1,3 @@
-
-
-
 <h5>新規会員登録</h5>
 <%= form_with model: @customer, url: customer_registration_path do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -37,12 +34,12 @@
 
   <div class="field">
     <%= f.label :住所 %><br />
-    <%= f.email_field :address, autofocus: true, autocomplete: "address" %>
+    <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
   </div>
 
   <div class="field">
     <%= f.label :電話番号（ハイフンなし） %><br />
-    <%= f.email_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
+    <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
   </div>
 
   <div class="field">
