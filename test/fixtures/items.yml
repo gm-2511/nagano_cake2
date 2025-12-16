@@ -3,11 +3,13 @@
 one:
   name: MyString
   price: 1
+  introduction: MyText
   is_active: false
   genre: one
 
 two:
   name: MyString
   price: 1
+  introduction: MyText
   is_active: false
   genre: two
