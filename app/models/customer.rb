@@ -2,6 +2,8 @@ class Customer < ApplicationRecord
   # 名前とメールは必須
   #validates :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true
+  validates :last_name_kana, format: { with: /\A[\p{katakana}\u{30FC}]+\z/, message: "はカタカナで入力してください" }, allow_blank: true
+  validates :first_name_kana, format: { with: /\A[\p{katakana}\u{30FC}]+\z/, message: "はカタカナで入力してください" }, allow_blank: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 

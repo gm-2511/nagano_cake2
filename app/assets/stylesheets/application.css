@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+ .pagination .page-item.active .page-link {
+  background-color: transparent !important; /* 背景を透明に */
+  border: none !important;                  /* 枠線を消す */
+  color: #007bff;                           /* 文字色 */
+  box-shadow: none !important;              /* 影を消す */
+  border-radius: 0 !important;              /* 角丸もリセット */
+  padding: 0.5rem 0.75rem;                  /* 必要なら余白を調整 */
+}

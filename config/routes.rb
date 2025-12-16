@@ -1,35 +1,34 @@
 Rails.application.routes.draw do
+  # ===== 管理者用ルート =====
   namespace :admin do
-    get 'customers/index'
+    root to: 'homes#top'
+
+    resources :items
+    resources :products, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    resources :genres, only: [:index, :create, :edit, :update]
+
+    resources :customers, only: [:index, :show, :edit, :update] do
+      resources :orders, only: [:index] # 会員ごとの注文一覧
+    end
+
+    resources :orders, only: [:show, :update] # 注文詳細・ステータス更新
+    resources :productions, only: [:update]   # 製作ステータス更新
   end
-  namespace :admin do
-    get 'genres/edit'
-  end
-  # 顧客
+
+  # ===== 顧客用 Devise =====
   devise_for :customers, skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
 
-  # 管理者
+  # ===== 管理者用 Devise =====
   devise_for :admins, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
 
-  # ===== 顧客側 =====
+  # ===== 顧客側ルート =====
   scope module: :public do
     root to: 'homes#top'
     resources :items, only: [:index, :show]
   end
-
-  # ===== 管理者側 =====
-  namespace :admin do
-    root to: 'homes#top'
-    resources :items
-    resources :products, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-    resources :genres, only: [:index, :create, :edit, :update]
-    resources :customers, only: [:index, :show, :edit, :update]
-  end
-
 end
-
