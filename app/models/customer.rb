@@ -1,4 +1,5 @@
 class Customer < ApplicationRecord
+  has_many :orders
   # 名前とメールは必須
   #validates :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true

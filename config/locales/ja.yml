@@ -1,0 +1,22 @@
+ja:
+  time:
+    formats:
+      short: "%Y/%m/%d %H:%M"
+
+  enums:
+    order:
+      status:
+        waiting_payment: "入金待ち"
+        payment_confirmed: "入金確認"
+        in_production: "製作中"
+        preparing_shipment: "発送準備中"
+        shipped: "発送済み"
+      payment_method:
+        bank_transfer: "銀行振込"
+        credit_card: "クレジットカード"
+      order_detail:              
+        making_status:
+          cannot_start: "着手不可"
+          waiting: "製作待ち"
+          in_production: "製作中"
+          completed: "製作完了"

@@ -1,0 +1,65 @@
+<div class="container mt-4">
+  <h3 class="mb-4">注文履歴詳細</h3>
+
+  <!-- 注文情報 -->
+  <div class="mb-3">
+    <p><strong>購入者:</strong> <%= @order.customer.last_name %> <%= @order.customer.first_name %></p>
+    <p><strong>注文日:</strong> <%= l(@order.created_at, format: :short) %></p>
+    <p><strong>配送先:</strong> <%= @order.customer.post_code %> <%= @order.customer.address %> <%= @order.customer.last_name %> <%= @order.customer.first_name %></p>
+    <p><strong>支払方法:</strong> <%= I18n.t("enums.order.payment_method.#{@order.payment_method}", locale: :ja) if @order.payment_method %></p>
+
+    <!-- 注文ステータス更新フォーム -->
+    <p><strong>注文ステータス:</strong></p>
+    <%= form_with model: @order, url: admin_order_path(@order), method: :patch, local: true do |f| %>
+      <%= f.select :status,
+          Order.statuses.keys.map { |s| [I18n.t("enums.order.status.#{s}", locale: :ja), s] },
+          { selected: @order.status },
+          class: "form-select" %>
+      <%= f.submit "更新", class: "btn btn-sm btn-success mt-1" %>
+    <% end %>
+  </div>
+
+  <!-- 注文商品一覧 -->
+  <table class="table table-bordered text-center align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>商品名</th>
+        <th>単価(税込)</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th>製作ステータス</th>
+        <th>更新</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_details.each do |od| %>
+        <tr>
+          <td><%= od.item.name %></td>
+          <td><%= number_to_currency(od.item.price, unit: "¥", precision: 0) %></td>
+          <td><%= od.amount %></td>
+          <td><%= number_to_currency(od.amount * od.item.price, unit: "¥", precision: 0) %></td>
+
+          <!-- 製作ステータス更新フォーム -->
+          <td>
+            <%= form_with model: od, url: admin_order_order_detail_path(@order, od), method: :patch, local: true do |f| %>
+              <%= f.select :making_status,
+                  OrderDetail.making_statuses.keys.map { |s| [I18n.t("enums.order.order_detail.making_status.#{s}", locale: :ja), s] },
+                  { selected: od.making_status },
+                  class: "form-select" %>
+          </td>
+          <td>
+              <%= f.submit "更新", class: "btn btn-sm btn-success mt-1" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <!-- 合計金額 -->
+  <div class="text-end mt-3">
+    <p><strong>商品合計:</strong> <%= number_to_currency(@order.total_amount, unit: "¥", precision: 0) %></p>
+    <p><strong>送料:</strong> <%= number_to_currency(@order.shipping_fee, unit: "¥", precision: 0) %></p>
+    <p><strong>請求金額合計:</strong> <%= number_to_currency(@order.total_amount + @order.shipping_fee, unit: "¥", precision: 0) %></p>
+  </div>
+</div>
