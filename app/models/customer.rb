@@ -1,4 +1,6 @@
 class Customer < ApplicationRecord
+  has_many :cart_items, dependent: :destroy
+  has_many :items, through: :cart_items
   # 名前とメールは必須
   #validates :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true

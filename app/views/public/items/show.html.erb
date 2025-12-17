@@ -62,15 +62,18 @@
 
 # 2-C. カート投入フォームエリア（ワイヤーフレーム準拠）
             <div class="mt-4">
-              <%= form_with url: "#", local: true, class: "row g-3 align-items-center" do %>
+              <%= form_with model: @cart_item, url: cart_items_path, class: "row g-3 align-items-center" do |f| %>
                 <div class="col-auto">
-                  <label for="quantity" class="col-form-label">個数選択</label>
+                  <%= f.label :amount, "個数選択", class: "col-form-label" %>
                 </div>
                 <div class="col-auto">
-                  <input type="number" name="amount" id="quantity" class="form-control" style="width: 100px;" value="1" min="1">
+                  <%= f.number_field :amount, id: "quantity", class: "form-control", style: "width: 100px;", value: 1, min: 1 %>
                 </div>
+
+                <%= f.hidden_field :item_id, value: @item.id %>
+
                 <div class="col-auto">
-                  <%= button_tag type: 'submit', class: 'btn btn-success btn-lg' do %>
+                  <%= f.button :submit, class: 'btn btn-success btn-lg' do %>
                     カートに入れる
                   <% end %>
                 </div>
