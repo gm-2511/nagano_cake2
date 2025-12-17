@@ -1,5 +1,7 @@
 class Customer < ApplicationRecord
   has_many :orders
+  has_many :cart_items, dependent: :destroy
+  has_many :items, through: :cart_items
   # 名前とメールは必須
   #validates :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true
@@ -10,6 +12,8 @@ class Customer < ApplicationRecord
 
   # デフォルト値
   after_initialize :set_default_status, if: :new_record?
+
+  has_many :addresses, dependent: :destroy
 
   private
 
