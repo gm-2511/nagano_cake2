@@ -1,0 +1,15 @@
+<div class="col-md-3 mb-4">
+  <%= link_to item_path(item) do %>
+    <div class="card border-0">
+      <% if item.image.attached? %>
+        <%= image_tag item.image, class: "card-img-top img-thumbnail" %>
+      <% else %>
+        <img src="https://via.placeholder.com/300" class="card-img-top img-thumbnail">
+      <% end %>
+      <div class="card-body px-0 pb-0">
+        <p class="card-title text-dark"><strong><%= item.name %></strong></p>
+        <p class="card-text text-dark">¥<%= item.price.to_s(:delimited) %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

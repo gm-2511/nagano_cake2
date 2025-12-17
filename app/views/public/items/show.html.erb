@@ -1,15 +1,7 @@
 <div class="container my-5">
   <div class="row">
     
-    <div class="col-md-3">
-      <h4>ジャンル検索</h4>
-        <div class="list-group">
-          <% Genre.all.each do |genre| %>
-            <%= link_to genre.name, items_path(genre_id: genre.id), class: "list-group-item list-group-item-action" %>
-          <% end %>
-          <%= link_to "全商品", items_path, class: "list-group-item list-group-item-action table-secondary" %>
-        </div>
-    </div>
+  <%= render 'public/items/genre_search', genres: @genres %>
     
     <div class="col-md-9">
       
@@ -36,7 +28,7 @@
                   <th scope="row">価格</th>
                   <td>
                     <span class="h4 text-danger">
-                      ¥<%= (@item.price * 1.1).to_i.to_s(:delimited) %> 
+                      ¥<%= @item.with_tax_price.to_s(:delimited) %>
                     </span>
                     <span class="small">(税込)</span>
                   </td>

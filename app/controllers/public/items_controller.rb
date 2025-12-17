@@ -2,7 +2,7 @@ class Public::ItemsController < ApplicationController
   # 商品一覧
   def index
     # 販売中の商品のみを対象とするクエリをスタート地点とする
-    base_items = Item.where(is_active: true)
+    base_items = Item.where(is_active: true).order(created_at: :desc)
     # 全ジャンルを取得し、サイドバーに渡す
     @genres = Genre.all
     # 絞り込みロジックの追加

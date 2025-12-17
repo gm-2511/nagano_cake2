@@ -1,15 +1,7 @@
 <div class="container my-5">
   <div class="row">
     
-    <div class="col-md-3">
-      <h4>ジャンル検索</h4>
-        <div class="list-group">
-          <% Genre.all.each do |genre| %>
-            <%= link_to genre.name, items_path(genre_id: genre.id), class: "list-group-item list-group-item-action" %>
-          <% end %>
-          <%= link_to "全商品", items_path, class: "list-group-item list-group-item-action table-secondary" %>
-        </div>
-    </div>
+    <%= render 'public/items/genre_search', genres: @genres %>
     
     <div class="col-md-9">
       <h2 class="mb-4">
@@ -18,25 +10,7 @@
       </h2>
 
       <div class="row">
-        <% @items.each do |item| %>
-          <div class="col-md-3 mb-4">
-            <div class="card h-100">
-              <div class="text-center p-3">
-                <img src="https://via.placeholder.com/150" alt="<%= item.name %>" class="img-fluid" style="height: 150px; object-fit: cover;">
-              </div>
-              <div class="card-body">
-                <h5 class="card-title text-center">
-                  <%= link_to item_path(item) do %>
-                    <%= item.name %>
-                  <% end %>
-                </h5>
-                <p class="card-text text-center text-danger">
-                  ¥<%= item.price.to_s(:delimited) %>
-                </p>
-              </div>
-            </div>
-          </div>
-        <% end %>
+        <%= render partial: 'public/items/item_card', collection: @items, as: :item %>
       </div>
 
       <div class="d-flex justify-content-center mt-4">

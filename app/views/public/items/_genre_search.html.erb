@@ -1,0 +1,9 @@
+<div class="col-md-3">
+  <h4>ジャンル検索</h4>
+  <div class="list-group">
+    <% genres.each do |genre| %>
+      <%= link_to genre.name, items_path(genre_id: genre.id), class: "list-group-item list-group-item-action" %>
+    <% end %>
+    <%= link_to "全商品", items_path, class: "list-group-item list-group-item-action table-secondary" %>
+  </div>
+</div>
