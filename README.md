@@ -1,24 +1,41 @@
-# README
+# NAGANO CAKE (ながのCAKE)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+長野県にある小さな洋菓子店「ながのCAKE」の商品を通販するためのECサイトです。  
+管理者による商品・顧客管理機能と、会員による商品購入・注文管理機能を備えています。
 
-Things you may want to cover:
+## 1. 開発環境
+* **言語**: Ruby 3.1.2p20
+* **フレームワーク**: Ruby on Rails 6.1.7.10
+* **フロントエンド**: Bootstrap 4
+* **認証基盤**: Devise (Admin / Customer)
 
-* Ruby version
+## 2. 機能一覧
 
-* System dependencies
+### 顧客（Customer）側機能
+* **トップページ**: 新着商品の表示。
+* **商品一覧/詳細**: ジャンル検索、販売ステータスの表示。
+* **カート機能**: 商品の追加・数量変更・削除。
+* **注文機能**: 支払い方法・お届け先選択、注文履歴確認。
+* **マイページ**: 会員情報の編集、退会手続き。
 
-* Configuration
+### 管理者（Admin）側機能
+* **商品管理**: 商品の新規登録、編集、販売ステータス管理。
+* **ジャンル管理**: 商品カテゴリーの追加・編集。
+* **会員管理**: 登録済み顧客の一覧および詳細確認、退会機能管理。
+* **注文管理**: 全顧客の注文履歴一覧、注文ステータス・製作ステータスの更新。
 
-* Database creation
+## 3. レイアウト・デザインの仕様
 
-* Database initialization
+### ヘッダーの表示切り替え
+ログイン状態によって、表示するリンクを変更しています。
 
-* How to run the test suite
+### トップページ構成
+* **サイドバー**: 全ジャンルをリスト表示し、クリックでジャンル検索を実行。
+* **メインビジュアル**: サイトの説明を表示。
+* **新着商品**: 作成された最新の4件の商品を取得して表示。
 
-* Services (job queues, cache servers, search engines, etc.)
+## 4. 導入手順（セットアップ）
 
-* Deployment instructions
-
-* ...
+1. **リポジトリをクローン**
+   ```bash
+   git clone git@github.com:gm-2511/nagano_cake2.git
