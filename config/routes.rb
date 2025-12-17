@@ -30,5 +30,10 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     resources :items, only: [:index, :show]
+    resources :cart_items, only: [:index, :update, :destroy] do
+      # カートを空にするためのカスタムルーティング（一括削除）
+      collection do
+        delete 'destroy_all'
+      end
   end
 end
