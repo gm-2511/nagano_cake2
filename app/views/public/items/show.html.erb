@@ -1,7 +1,6 @@
 <div class="container my-5">
   <div class="row">
     
-# --- 1. 左側のジャンル検索エリア (col-md-3) ---
     <div class="col-md-3">
       <h4>ジャンル検索</h4>
       <%# ナビゲーション担当の方の実装待ちのため、箱だけを用意 %>
@@ -18,14 +17,12 @@
       </div>
     </div>
     
-# --- 2. 右側のメインコンテンツエリア (col-md-9) ---
     <div class="col-md-9">
       
       <% if @item.present? %>
         <h2 class="mb-4"><%= @item.name %></h2>
 
         <div class="row">
-# --- 2-A. 商品画像エリア (col-md-5, 親のcol-md-9内) ---
           <div class="col-md-5">
             <% if @item.image.attached? %>
               <%= image_tag @item.image, alt: @item.name, class: "img-fluid" %>
@@ -34,7 +31,6 @@
             <% end %>
           </div>
           
-# --- 2-B. 商品情報/フォームエリア (col-md-7, 親のcol-md-9内) ---
           <div class="col-md-7">
             <table class="table table-borderless">
               <tbody>
@@ -54,13 +50,12 @@
                 <tr>
                   <th scope="row">ジャンル</th>
                   <td>
-                    [ジャンル名]
+                    <%= @item.genre.name %>
                   </td>
                 </tr>
               </tbody>
             </table>
 
-# 2-C. カート投入フォームエリア（ワイヤーフレーム準拠）
             <div class="mt-4">
               <%= form_with model: @cart_item, url: cart_items_path, class: "row g-3 align-items-center" do |f| %>
                 <div class="col-auto">

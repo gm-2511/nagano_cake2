@@ -1,7 +1,6 @@
 <div class="container my-5">
   <div class="row">
     
-# --- 1. 左側のジャンル検索エリア (col-md-3) ---
     <div class="col-md-3">
       <h4>ジャンル検索</h4>
       <%# ナビゲーション担当の方の実装待ちのため、箱だけを用意 %>
@@ -18,7 +17,6 @@
       </div>
     </div>
     
-# --- 2. 右側のメインコンテンツエリア (col-md-9) ---
     <div class="col-md-9">
       <h2 class="mb-4">商品一覧 (<%= @items.total_count %>件)</h2>
 
@@ -31,7 +29,7 @@
               </div>
               <div class="card-body">
                 <h5 class="card-title text-center">
-                  <%= link_to public_item_path(item) do %>
+                  <%= link_to item_path(item) do %>
                     <%= item.name %>
                   <% end %>
                 </h5>
@@ -44,7 +42,6 @@
         <% end %>
       </div>
 
-# --- 2. ページネーションの表示 ---
       <div class="d-flex justify-content-center mt-4">
         <%= paginate @items %>
       </div>
