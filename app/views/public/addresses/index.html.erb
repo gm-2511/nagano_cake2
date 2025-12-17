@@ -18,21 +18,21 @@
         <div class="row mb-3 align-items-center">
           <%= f.label :post_code, "郵便番号(ハイフンなし)", class: "col-md-3 col-form-label" %>
           <div class="col-md-3">
-            <%= f.text_field :post_code, class: "form-control", placeholder: "0000000" %>
+            <%= f.text_field :post_code, class: "form-control" %>
           </div>
         </div>
 
         <div class="row mb-3 align-items-center">
           <%= f.label :address, "住所", class: "col-md-3 col-form-label" %>
           <div class="col-md-6">
-            <%= f.text_field :address, class: "form-control", placeholder: "東京都渋谷区代々木神園町0-0" %>
+            <%= f.text_field :address, class: "form-control" %>
           </div>
         </div>
 
         <div class="row mb-5 align-items-center">
           <%= f.label :name, "宛名", class: "col-md-3 col-form-label" %>
           <div class="col-md-3">
-            <%= f.text_field :name, class: "form-control", placeholder: "令和道子" %>
+            <%= f.text_field :name, class: "form-control" %>
           </div>
           <div class="col-md-3 offset-md-3 text-end">
             <%= f.submit "新規登録", class: "btn btn-success px-4" %>

@@ -7,8 +7,8 @@
       </div>
 
       <div class="d-flex align-items-center mb-3">
-        <h5 class="fw-bold mb-0 me-4">登録情報</h5>
-        <%= link_to '編集する', edit_customer_path, class: 'btn btn-success px-4 py-1' %>
+        <h5 class="fw-bold mb-0 me-4 mr-3">登録情報</h5>
+        <%= link_to '編集する', edit_information_path, class: 'btn btn-success px-4 py-1' %>
       </div>
 
       <table class="table table-bordered border-dark">
@@ -27,7 +27,7 @@
           </tr>
           <tr>
             <th class="bg-light">住所</th>
-            <td><%= @customer.addredd %></td> </tr>
+            <td><%= @customer.address %></td> </tr>
           <tr>
             <th class="bg-light">電話番号</th>
             <td><%= @customer.telephone_number %></td>
@@ -46,7 +46,7 @@
         </div>
         <div class="d-flex align-items-center mb-4">
           <h5 class="fw-bold mb-0" style="width: 120px;">注文履歴</h5>
-          <%= link_to '一覧を見る', orders_path, class: 'btn btn-primary px-4' %>
+
         </div>
       </div>
 

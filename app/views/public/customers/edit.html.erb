@@ -9,20 +9,20 @@
         <div class="row mb-3">
           <label class="col-md-3 col-form-label">氏名</label>
           <div class="col-md-3">
-            <%= f.text_field :last_name, class: "form-control", placeholder: "山田" %>
+            <%= f.text_field :last_name, class: "form-control" %>
           </div>
           <div class="col-md-3">
-            <%= f.text_field :first_name, class: "form-control", placeholder: "花子" %>
+            <%= f.text_field :first_name, class: "form-control" %>
           </div>
         </div>
 
         <div class="row mb-3">
           <label class="col-md-3 col-form-label">フリガナ</label>
           <div class="col-md-3">
-            <%= f.text_field :last_name_kana, class: "form-control", placeholder: "ヤマダ" %>
+            <%= f.text_field :last_name_kana, class: "form-control" %>
           </div>
           <div class="col-md-3">
-            <%= f.text_field :first_name_kana, class: "form-control", placeholder: "ハナコ" %>
+            <%= f.text_field :first_name_kana, class: "form-control" %>
           </div>
         </div>
 
@@ -59,7 +59,7 @@
             <%= f.submit "編集内容を保存", class: "btn btn-success px-5 fw-bold w-100" %>
           </div>
           <div class="col-md-2 offset-md-2">
-            <%= link_to "退会する", customers_unsubscribe_path, class: "btn btn-danger px-4 fw-bold w-100" %>
+            <%= link_to "退会する", unsubscribe_path, class: "btn btn-danger px-4 fw-bold w-100" %>
           </div>
         </div>
         
