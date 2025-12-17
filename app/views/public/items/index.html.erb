@@ -5,14 +5,17 @@
       <h4>ジャンル検索</h4>
         <div class="list-group">
           <% Genre.all.each do |genre| %>
-            <%# ジャンル名をクリックした時のリンク先（後でジャンル検索機能を実装する際に使います） %>
-            <%= link_to genre.name, '#', class: "list-group-item list-group-item-action" %>
+            <%= link_to genre.name, items_path(genre_id: genre.id), class: "list-group-item list-group-item-action" %>
           <% end %>
+          <%= link_to "全商品", items_path, class: "list-group-item list-group-item-action table-secondary" %>
         </div>
     </div>
     
     <div class="col-md-9">
-      <h2 class="mb-4">商品一覧 (<%= @items.total_count %>件)</h2>
+      <h2 class="mb-4">
+        <%= @genre_name %> 一覧
+        <span class="small">(全<%= @items.total_count %>件)</span>
+      </h2>
 
       <div class="row">
         <% @items.each do |item| %>

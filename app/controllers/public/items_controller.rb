@@ -1,13 +1,10 @@
 class Public::ItemsController < ApplicationController
   # 商品一覧
   def index
-    # 💡 【修正点】基本となるクエリを定義
     # 販売中の商品のみを対象とするクエリをスタート地点とする
     base_items = Item.where(is_active: true)
-
     # 全ジャンルを取得し、サイドバーに渡す
     @genres = Genre.all
-    
     # 絞り込みロジックの追加
     if params[:genre_id].present?
       # ジャンルIDがある場合、基本クエリにジャンル条件を追加
