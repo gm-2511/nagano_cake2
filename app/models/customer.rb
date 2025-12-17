@@ -1,4 +1,5 @@
 class Customer < ApplicationRecord
+  has_many :orders
   has_many :cart_items, dependent: :destroy
   has_many :items, through: :cart_items
   # 名前とメールは必須

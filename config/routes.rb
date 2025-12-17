@@ -11,8 +11,11 @@ Rails.application.routes.draw do
       resources :orders, only: [:index] # 会員ごとの注文一覧
     end
 
-    resources :orders, only: [:show, :update] # 注文詳細・ステータス更新
-    resources :productions, only: [:update]   # 製作ステータス更新
+    resources :orders, only: [:index, :show, :update] do
+      resources :order_details, only: [:edit, :update] # ← ネスト
+    end
+
+    resources :productions, only: [:update]
   end
 
   # ===== 顧客用 Devise =====
