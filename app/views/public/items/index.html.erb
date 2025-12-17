@@ -3,18 +3,12 @@
     
     <div class="col-md-3">
       <h4>ジャンル検索</h4>
-      <%# ナビゲーション担当の方の実装待ちのため、箱だけを用意 %>
-      <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action active">
-          [ジャンルA]
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">
-          [ジャンルB]
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">
-          [ジャンルC]
-        </a>
-      </div>
+        <div class="list-group">
+          <% Genre.all.each do |genre| %>
+            <%# ジャンル名をクリックした時のリンク先（後でジャンル検索機能を実装する際に使います） %>
+            <%= link_to genre.name, '#', class: "list-group-item list-group-item-action" %>
+          <% end %>
+        </div>
     </div>
     
     <div class="col-md-9">
