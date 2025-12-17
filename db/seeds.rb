@@ -8,6 +8,16 @@
 # =====================
 
 # =====================
+# 既存データ削除（重複防止）
+# =====================
+OrderDetail.delete_all
+Order.delete_all
+Customer.delete_all
+Item.delete_all
+Genre.delete_all
+Admin.delete_all
+
+# =====================
 # ジャンル作成
 # =====================
 cake    = Genre.find_or_create_by!(name: "ケーキ")
@@ -32,7 +42,7 @@ Item.create!([
 ])
 
 # =====================
-# 会員作成（1ページ目想定）
+# 顧客作成（1ページ目）
 # =====================
 customers = [
   { first_name: "花子", last_name: "山田", email: "hoge@example.com", is_active: true },
@@ -64,7 +74,7 @@ customers.each do |c|
 end
 
 # =====================
-# 注文用会員（会員一覧2ページ目以降）
+# 注文用顧客（2ページ目以降）
 # =====================
 order_customers = [
   { last_name: "石倉", first_name: "基之", email: "ishikura@example.com" },
@@ -101,8 +111,10 @@ Admin.find_or_create_by!(email: "admin@example.com") do |admin|
 end
 
 # =====================
-# 注文データ（注文履歴一覧 見本どおり）
+# 注文データ（ワイヤーフレーム通り）
 # =====================
+item = Item.first
+
 order_data = [
   { email: "ishikura@example.com", created_at: "2019-11-20 23:55:12", quantity: 1, status: :waiting_payment },
   { email: "hoge@example.com",     created_at: "2019-11-20 14:22:19", quantity: 8, status: :waiting_payment },
@@ -116,13 +128,21 @@ order_data = [
   { email: "hosaka@example.com",   created_at: "2019-11-10 00:09:00", quantity: 1, status: :shipped }
 ]
 
-item = Item.first
-
 order_data.each do |data|
-  customer = Customer.find_by!(email: data[:email])
+  customer = Customer.find_by(email: data[:email])
+  next unless customer
+
+  # 商品合計 + 送料
+  total_payment = item.price * data[:quantity] + 800
 
   order = Order.create!(
     customer: customer,
+    post_code: customer.post_code,
+    address: customer.address,
+    name: "#{customer.last_name} #{customer.first_name}",
+    shipping_cost: 800,
+    total_payment: total_payment,
+    payment_method: :bank_transfer,
     status: data[:status],
     created_at: data[:created_at],
     updated_at: data[:created_at]
@@ -132,27 +152,7 @@ order_data.each do |data|
     order: order,
     item: item,
     amount: data[:quantity],
-    price: item.price
+    price: item.price,
     making_status: :cannot_start
   )
 end
-
-# 顧客作成
-customer = Customer.create!(
-  first_name: "花子",
-  last_name: "山田",
-  post_code: "150-0041",
-  address: "東京都渋谷区神南1丁目19–11 八一夕工一夕了24階",
-  email: "hoge@example.com",
-  password: "password"
-)
-
-# ダミー注文作成
-Order.create!(
-  customer: customer,
-  total_quantity: 3,
-  status: :waiting_payment,
-  payment_method: :bank_transfer,  # 支払方法
-  created_at: "2019-11-20 14:22:19",
-  updated_at: "2019-11-20 14:22:19"
-)
