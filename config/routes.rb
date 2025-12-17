@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:update]
     
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
-    resources :cart_items, only: [:index, :update, :destroy] do
+    resources :cart_items, only: [:index, :update, :destroy ,:create] do
       # カートを空にするためのカスタムルーティング（一括削除）
       collection do
         delete 'destroy_all'
