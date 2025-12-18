@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
     resources :items
     resources :products, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-    resources :genres, only: [:index, :create, :edit, :update]
+    resources :genres, only: [:index, :create, :edit, :update, :destroy]
 
     resources :customers, only: [:index, :show, :edit, :update] do
       resources :orders, only: [:index] # 会員ごとの注文一覧

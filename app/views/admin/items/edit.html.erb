@@ -1,5 +1,6 @@
 <div class="container mt-4">
   <h3 class="mb-4">商品編集</h3>
+  <%= render 'admin/shared/error_messages', resource: @item %>
 
   <%= form_with model: [:admin, @item], local: true do |f| %>
 
@@ -54,6 +55,14 @@
 
     <!-- 保存ボタン -->
     <%= f.submit "変更を保存", class: "btn btn-success" %>
+
+    <!-- 削除ボタン -->
+    <div class="mt-3">
+      <%= link_to "商品を削除", admin_item_path(@item),
+                method: :delete,
+                data: { confirm: "本当に削除しますか？" },
+                class: "btn btn-danger" %>
+    </div>
 
   <% end %>
 </div>

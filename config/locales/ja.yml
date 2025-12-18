@@ -14,9 +14,103 @@ ja:
       payment_method:
         bank_transfer: "銀行振込"
         credit_card: "クレジットカード"
-      order_detail:              
+      order_detail:
         making_status:
           cannot_start: "着手不可"
           waiting: "製作待ち"
           in_production: "製作中"
           completed: "製作完了"
+
+  errors:
+    messages:
+      not_saved: "保存できませんでした"
+      blank: "を入力してください"
+      not_a_number: "は数値で入力してください"
+      taken: "はすでに存在します"
+
+  activerecord:
+    models:
+      item: "商品"
+      genre: "ジャンル"
+      customer: "顧客"
+      order: "注文"
+      order_detail: "注文詳細"
+      cart_item: "カート商品"
+      address: "住所"
+
+    attributes:
+      item:
+        genre: "ジャンル"        # association 用
+        genre_id: "ジャンル"     # DBカラム用
+        name: "商品名"
+        price: "価格"
+        introduction: "商品説明"
+      customer:
+        first_name: "名"
+        last_name: "姓"
+        first_name_kana: "名（カナ）"
+        last_name_kana: "姓（カナ）"
+        email: "メールアドレス"
+      genre:
+        name: "ジャンル名"
+      order:
+        status: "注文ステータス"
+        payment_method: "支払い方法"
+      order_detail:
+        making_status: "製作ステータス"
+      cart_item:
+        amount: "数量"
+      address:
+        postcode: "郵便番号"
+        address: "住所"
+        name: "宛名"
+
+    errors:
+      models:
+        item:
+          attributes:
+            genre:
+              blank: "を入力してください"
+              required: "を入力してください"
+            name:
+              blank: "を入力してください"
+            price:
+              blank: "を入力してください"
+              not_a_number: "は数値で入力してください"
+        customer:
+          attributes:
+            first_name:
+              blank: "を入力してください"
+            last_name:
+              blank: "を入力してください"
+            email:
+              blank: "を入力してください"
+              taken: "はすでに存在します"
+        genre:
+          attributes:
+            name:
+              blank: "を入力してください"
+              taken: "はすでに存在します"
+        order:
+          attributes:
+            status:
+              blank: "を入力してください"
+            payment_method:
+              blank: "を入力してください"
+        order_detail:
+          attributes:
+            making_status:
+              blank: "を入力してください"
+        cart_item:
+          attributes:
+            amount:
+              blank: "を入力してください"
+              not_a_number: "は数値で入力してください"
+        address:
+          attributes:
+            postcode:
+              blank: "を入力してください"
+            address:
+              blank: "を入力してください"
+            name:
+              blank: "を入力してください"
