@@ -5,4 +5,8 @@ class Item < ApplicationRecord
   def with_tax_price
   (price * 1.1).floor
   end
+
+  def get_image
+  (image.attached?) ? image : 'no_image.jpg' # 環境に合わせて修正してください
+  end
 end
