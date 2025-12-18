@@ -1,27 +1,12 @@
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-3">
-      <table class="table table-bordered">
-        <thead class="bg-light">
-          <tr><th class="text-center">ジャンル検索</th></tr>
-        </thead>
-        <tbody>
-          <% @genres.each do |genre| %>
-            <tr>
-              <td class="px-3">
-                <%= link_to genre.name, items_path(genre_id: genre.id), class: "text-dark text-decoration-none" %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+    <%= render 'public/items/genre_search', genres: @genres %>
 
     <div class="col-md-9">
       <div class="mb-5 d-flex justify-content-center align-items-center" 
            style="height: 350px; 
                   background-image: url(<%= asset_path('top_background_img.png') %>); 
-                  background-size: contain;
+                  background-size: contain; 
                   background-position: center;">
         
         <div class="text-center text-dark fw-bold" style="text-shadow: 1px 1px 2px white;">
@@ -34,13 +19,7 @@
       <h3 class="mb-4">新着商品</h3>
       <div class="row">
         <% @items.each do |item| %>
-          <div class="col-md-3 mb-4">
-            <div class="border mb-2" style="height: 150px; background-color: #eee;">
-              <%= image_tag item.get_image, class: 'w-100 h-100', style: 'object-fit: cover;' %>
-            </div>
-            <p class="mb-1 fw-bold text-truncate"><%= item.name %></p>
-            <p class="mb-0">¥<%= item.with_tax_price.to_s(:delimited) %></p>
-          </div>
+          <%= render 'public/items/item_card', item: item %>
         <% end %>
       </div>
 
