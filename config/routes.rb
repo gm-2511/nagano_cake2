@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  namespace :public do
+    get 'orders/new'
+    get 'orders/confirm'
+    get 'orders/thanks'
+    get 'orders/create'
+    get 'orders/index'
+    get 'orders/show'
+  end
   # ===== 管理者用ルート =====
   namespace :admin do
     root to: 'homes#top'
@@ -49,6 +57,12 @@ Rails.application.routes.draw do
       # カートを空にするためのカスタムルーティング（一括削除）
       collection do
         delete 'destroy_all'
+      end
+    end
+    resources :orders, only: [:new, :create, :index, :show] do
+      collection do
+        post 'confirm' # 注文情報確認画面
+        get 'thanks'   # 完了画面（サンクスページ）
       end
     end
   end

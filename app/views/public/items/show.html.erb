@@ -10,11 +10,7 @@
 
         <div class="row">
           <div class="col-md-5">
-            <% if @item.image.attached? %>
-              <%= image_tag @item.image, alt: @item.name, class: "img-fluid" %>
-            <% else %>
-              <img src="https://via.placeholder.com/300" alt="<%= @item.name %>" class="img-fluid">
-            <% end %>
+            <%= image_tag @item.get_image, alt: @item.name, class: "img-fluid rounded" %>
           </div>
           
           <div class="col-md-7">

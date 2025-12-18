@@ -1,0 +1,60 @@
+<div class="container">
+  <h2 class="my-4">注文情報入力</h2>
+
+  <%= form_with model: @order, url: confirm_orders_path, method: :post, local: true do |f| %>
+    
+    <h4 class="mt-4">支払方法</h4>
+    <div class="ml-4">
+      <%= f.radio_button :payment_method, "bank_transfer", checked: true %>
+      <%= f.label :payment_method_bank_transfer, "銀行振込" %><br>
+      <%= f.radio_button :payment_method, "credit_card" %>
+      <%= f.label :payment_method_credit_card, "クレジットカード" %><br>
+    </div>
+
+    <h4 class="mt-4">お届け先</h4>
+    <div class="ml-4">
+      
+      <div>
+        <%= f.radio_button :select_address, 0, checked: true %>
+        <%= f.label :select_address_0, "ご自身の住所" %><br>
+        <span class="ml-4">
+          〒<%= current_customer.post_code %> <%= current_customer.address %><br>
+          <span class="ml-4"><%= current_customer.last_name + current_customer.first_name %></span>
+        </span>
+      </div>
+
+      <div class="mt-3">
+        <%= f.radio_button :select_address, 1 %>
+        <%= f.label :select_address_1, "登録済住所から選択" %><br>
+        <span class="ml-4">
+          <%= f.select :address_id, options_from_collection_for_select(current_customer.addresses, :id, :shipping_info) %>
+        </span>
+      </div>
+
+      <div class="mt-3">
+        <%= f.radio_button :select_address, 2 %>
+        <%= f.label :select_address_2, "新しいお届け先" %><br>
+        <div class="ml-4">
+          <div class="form-group row">
+            <%= f.label :post_code, "郵便番号(ハイフンなし)", class: "col-sm-3" %>
+            <%= f.text_field :post_code, placeholder: "0000000", class: "col-sm-3 form-control" %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :address, "住所", class: "col-sm-3" %>
+            <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", class: "col-sm-6 form-control" %>
+          </div>
+          <div class="form-group row">
+            <%= f.label :name, "宛名", class: "col-sm-3" %>
+            <%= f.text_field :name, placeholder: "令和道子", class: "col-sm-3 form-control" %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-5">
+      <%= f.submit "確認画面へ進む", class: "btn btn-primary px-5" %>
+    </div>
+
+  <% end %>
+</div>
