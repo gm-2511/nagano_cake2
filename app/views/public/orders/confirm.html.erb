@@ -1,74 +1,82 @@
-<div class="container">
-  <h2 class="my-4">注文情報確認</h2>
-
+<div class="container my-5 px-5 px-sm-0">
   <div class="row">
-    <div class="col-md-8">
-      <table class="table table-bordered">
-        <thead class="thead-light">
-          <tr>
-            <th>商品名</th>
-            <th>単価(税込)</th>
-            <th>数量</th>
-            <th>小計</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @cart_items.each do |cart_item| %>
+    <div class="col-md-10 offset-md-1">
+      
+      <h2 class="bg-light d-inline-block px-3 mb-4">注文情報確認</h2>
+
+      <div class="row">
+        <div class="col-md-8">
+          <table class="table table-bordered border-dark">
+            <thead class="bg-light">
+              <tr>
+                <th>商品名</th>
+                <th>単価(税込)</th>
+                <th>数量</th>
+                <th>小計</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @cart_items.each do |cart_item| %>
+                <tr>
+                  <td class="align-middle">
+                    <div class="d-flex align-items-center">
+                      <%= image_tag cart_item.item.get_image, class: "img-fluid border mr-3", style: "width: 80px; height: 60px; object-fit: cover;" %>
+                      <span class="font-weight-bold"><%= cart_item.item.name %></span>
+                    </div>
+                  </td>
+                  <td class="align-middle"><%= cart_item.item.with_tax_price.to_s(:delimited) %></td>
+                  <td class="align-middle"><%= cart_item.amount %></td>
+                  <td class="align-middle"><%= cart_item.subtotal.to_s(:delimited) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-4">
+          <table class="table table-bordered border-dark mb-0">
             <tr>
-              <td>
-                <%= image_tag cart_item.item.get_image, size: "50x40" %>
-                <%= cart_item.item.name %>
-              </td>
-              <td><%= cart_item.item.with_tax_price.to_s(:delimited) %></td>
-              <td><%= cart_item.amount %></td>
-              <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+              <th class="bg-light w-50">送料</th>
+              <td><%= @shipping_cost.to_s(:delimited) %></td>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+            <tr>
+              <th class="bg-light">商品合計</th>
+              <td><%= @total_amount.to_s(:delimited) %></td>
+            </tr>
+            <tr>
+              <th class="bg-light">請求金額</th>
+              <td class="font-weight-bold"><%= @order.total_payment.to_s(:delimited) %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
 
-    <div class="col-md-3 offset-md-1">
-      <table class="table table-bordered">
-        <tr>
-          <th class="table-secondary">送料</th>
-          <td><%= @shipping_cost.to_s(:delimited) %></td>
-        </tr>
-        <tr>
-          <th class="table-secondary">商品合計</th>
-          <td><%= @total_amount.to_s(:delimited) %></td>
-        </tr>
-        <tr>
-          <th class="table-secondary">請求金額</th>
-          <td><strong><%= @order.total_payment.to_s(:delimited) %></strong></td>
-        </tr>
-      </table>
-    </div>
-  </div>
+      <div class="mt-4">
+        <div class="d-flex align-items-start mb-3">
+          <h5 class="font-weight-bold mr-3" style="min-width: 100px;">支払方法</h5>
+          <span><%= @order.payment_method_i18n %></span>
+        </div>
 
-  <div class="mt-4">
-    <div class="d-flex mb-3">
-      <h5 class="font-weight-bold mr-3">支払方法</h5>
-      <span><%= @order.payment_method_i18n %></span>
-    </div>
+        <div class="d-flex align-items-start">
+          <h5 class="font-weight-bold mr-3" style="min-width: 100px;">お届け先</h5>
+          <span>
+            〒<%= @order.post_code %> <%= @order.address %><br>
+            <%= @order.name %>
+          </span>
+        </div>
+      </div>
 
-    <div class="d-flex">
-      <h5 class="font-weight-bold mr-3">お届け先</h5>
-      <span>
-        〒<%= @order.post_code %> <%= @order.address %><br>
-        <%= @order.name %>
-      </span>
+      <div class="text-center my-5">
+        <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
+          <%= f.hidden_field :payment_method %>
+          <%= f.hidden_field :post_code %>
+          <%= f.hidden_field :address %>
+          <%= f.hidden_field :name %>
+          <%= f.hidden_field :total_payment %>
+          <%= f.submit "注文を確定する", class: "btn btn-success btn-lg px-5" %>
+        <% end %>
+      </div>
+      
     </div>
-  </div>
-
-  <div class="text-center my-5">
-    <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
-      <%= f.hidden_field :payment_method %>
-      <%= f.hidden_field :post_code %>
-      <%= f.hidden_field :address %>
-      <%= f.hidden_field :name %>
-      <%= f.hidden_field :total_payment %>
-      <%= f.submit "注文を確定する", class: "btn btn-success btn-lg px-5" %>
-    <% end %>
   </div>
 </div>
