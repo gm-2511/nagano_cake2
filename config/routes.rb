@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
 
     resources :orders, only: [:index, :show, :update] do
-      resources :order_details, only: [:edit, :update] # ← ネスト
+      resources :order_details, only: [:edit, :update] 
     end
 
     resources :productions, only: [:update]
@@ -33,16 +33,17 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get 'about' => 'homes#about', as: 'about'
+
     resources :items, only: [:index, :show]
 
-    # 会員情報の編集・更新・退会確認・退会処理用のルーティングを追加
+    # 会員情報の編集・更新・退会確認・退会処理用のルーティング
     get 'customers/my_page' => 'customers#show', as: 'my_page'
     get 'customers/information/edit' => 'customers#edit', as: 'edit_information'
     patch 'customers/information' => 'customers#update', as: 'update_information'
     get 'customers/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     patch 'customers/withdraw' => 'customers#withdraw', as: 'withdraw'
     resources :customers, only: [:update]
-    
+
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     resources :cart_items, only: [:index, :update, :destroy ,:create] do
       # カートを空にするためのカスタムルーティング（一括削除）
@@ -52,3 +53,4 @@ Rails.application.routes.draw do
     end
   end
 end
+
