@@ -27,6 +27,7 @@ ja:
       blank: "を入力してください"
       not_a_number: "は数値で入力してください"
       taken: "はすでに存在します"
+      confirmation: "と一致しません"
 
   activerecord:
     models:
