@@ -4,7 +4,6 @@ class Public::CartItemsController < ApplicationController
   def index
     # ログイン中の顧客のカートアイテム全てを取得
     @cart_items = current_customer.cart_items.all
-    # View (app/views/public/cart_items/index.html.erb) に渡されます
   end
 
   def create

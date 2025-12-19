@@ -1,5 +1,4 @@
 class Public::ItemsController < ApplicationController
-  # 商品一覧
   def index
     # 販売中の商品のみを対象とするクエリをスタート地点とする
     base_items = Item.where(is_active: true).order(created_at: :desc)
@@ -18,7 +17,6 @@ class Public::ItemsController < ApplicationController
     end
   end
   
-  # 商品詳細
   def show
     # 特定の商品をIDで取得する
     # find_by を使っているので、見つからない場合は nil になる

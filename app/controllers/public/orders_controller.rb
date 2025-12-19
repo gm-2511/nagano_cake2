@@ -4,7 +4,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
-    # 1. 支払方法をセット
+  # 1. 支払方法をセット
   @order = Order.new(payment_method: params[:order][:payment_method])
   
   # 2. 住所の判定とセット
