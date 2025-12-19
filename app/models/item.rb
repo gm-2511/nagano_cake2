@@ -7,6 +7,6 @@ class Item < ApplicationRecord
   end
 
   def get_image
-  (image.attached?) ? image : 'no_image.jpg' # 環境に合わせて修正してください
+  (image.attached?) ? image : 'no_image.jpg'
   end
 end
