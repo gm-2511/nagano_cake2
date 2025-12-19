@@ -6,6 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://kit.fontawesome.com/8e86ac478f.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -21,8 +22,13 @@
             <%= image_tag 'nagano_cake_logo.png', size: '160x100' %>
           <% end %>
         <% end %>
-          <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
+        <div class="flex-grow-1 ms-3 mt-2 ml-5">
+          <% if customer_signed_in? %>
+            <span class="fw-bold">ようこそ、<%= current_customer.last_name %> さん！</span>
+          <% end %>
+        </div>
+          <div class="collapse navbar-collapse d-flex flex-column align-items-end" id="navbarNav">
+            <ul class="navbar-nav mb-2">
               <% if admin_signed_in? %>
                 <li class="nav-item mx-4">
                   <%= link_to "商品一覧", admin_items_path, class: 'border border-primary rounded p-2' %>
@@ -67,15 +73,32 @@
                 </li>
               <% end %>
             </ul>
+            <div class="search-form-container mt-3 mb-1 mr-4">
+              <form class="d-flex border border-dark bg-white align-items-center" style="width: 220px; height: 32px; position: relative;">
+                <input class="form-control form-control-sm border-0 shadow-none px-2" type="search" placeholder="Search" style="border-radius: 0; height: 100%; width: 100%; padding-right: 35px;">
+                <div style="position: absolute; right: 8px; display: flex; align-items: center; pointer-events: none;">
+                  <i class="fa fa-search text-dark" aria-hidden="true" style="font-size: 0.9rem;"></i>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </nav>
       <hr>
     </header>
     <main class="mb-auto">
-    <%= yield %>
+      <div class="container mt-3">
+        <% unless admin_signed_in? %>
+          <% flash.each do |message_type, message| %>
+            <div class="alert alert-<%= message_type == 'notice' ? 'success' : 'danger' %>">
+              <%= message %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+        <%= yield %>
       <footer>
-      <hr>
+        <hr>
       </footer>
   </body>
 </html>
