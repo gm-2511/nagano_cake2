@@ -29,6 +29,19 @@ ja:
       taken: "はすでに存在します"
       confirmation: "と一致しません"
 
+  devise:
+    failure:
+      invalid: "メールアドレスまたはパスワードが正しくありません"
+      customer:
+        invalid: "メールアドレスまたはパスワードが正しくありません"
+      unauthenticated: "ログインしてください"
+    sessions:
+      signed_in: "ログインに成功しました"
+      signed_out: "ログアウトしました"
+      customer:
+        signed_in: "ログインに成功しました"
+        signed_out: "ログアウトしました"
+
   activerecord:
     models:
       item: "商品"
