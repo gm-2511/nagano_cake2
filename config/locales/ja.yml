@@ -61,7 +61,7 @@ ja:
       cart_item:
         amount: "数量"
       address:
-        postcode: "郵便番号"
+        post_code: "郵便番号"
         address: "住所"
         name: "宛名"
 
@@ -108,7 +108,7 @@ ja:
               not_a_number: "は数値で入力してください"
         address:
           attributes:
-            postcode:
+            post_code:
               blank: "を入力してください"
             address:
               blank: "を入力してください"
