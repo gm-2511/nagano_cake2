@@ -3,12 +3,10 @@
 <div style="display: flex; justify-content: center; gap: 40px; align-items: flex-start; flex-wrap: wrap;">
 
   <!-- 左側：商品画像 -->
-  <div>
-    <% if @item.image.attached? %>
-      <%= image_tag @item.image, style: "max-width: 300px; border: 1px solid #ccc; padding: 5px;" %>
-    <% else %>
-      <p>画像は登録されていません</p>
-    <% end %>
+  <div style="flex-shrink: 0;">
+    <%= image_tag @item.get_image, 
+                  alt: @item.name, 
+                  style: "width: 300px; height: 300px; object-fit: cover; border: 1px solid #ccc; padding: 5px;" %>
   </div>
 
   <!-- 右側：商品情報 -->
@@ -17,14 +15,14 @@
     <p><%= @item.name %></p>
 
     <p><strong>商品説明</strong></p>
-    <p><%= @item.introduction %></p>
+    <p><%= @item.introduction.presence || "説明はありません" %></p>
 
     <p><strong>ジャンル</strong></p>
     <p><%= @item.genre.name %></p>
 
     <p><strong>税込価格（税抜価格）</strong></p>
     <p>
-      <%= number_to_currency(@item.price * 1.1, unit: "¥", precision: 0) %> 
+      <%= number_to_currency(@item.with_tax_price, unit: "¥", precision: 0) %> 
       (<%= number_to_currency(@item.price, unit: "¥", precision: 0) %>)
     </p>
 

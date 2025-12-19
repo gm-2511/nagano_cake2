@@ -1,7 +1,7 @@
 class Admin::ItemsController < ApplicationController
   # 管理者のみアクセス可能
   before_action :authenticate_admin!
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_genres, only: [:new, :edit, :create, :update]
 
   def index
@@ -34,6 +34,11 @@ class Admin::ItemsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @item.destroy
+    redirect_to admin_items_path, notice: "商品を削除しました"
   end
 
   private

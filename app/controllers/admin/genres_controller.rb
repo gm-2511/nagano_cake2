@@ -1,5 +1,5 @@
 class Admin::GenresController < Admin::BaseController
-  before_action :set_genre, only: [:edit, :update]
+  before_action :set_genre, only: [:edit, :update, :destroy]
 
   def index
     @genres = Genre.all
@@ -27,6 +27,11 @@ class Admin::GenresController < Admin::BaseController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @genre.destroy
+    redirect_to admin_genres_path, notice: "ジャンルを削除しました"
   end
 
   private
